@@ -92,9 +92,9 @@ az network nic update --name $NICNAME --resource-group "rg_eastus_hub" --ip-forw
 NVAIP="$(az vm list-ip-addresses --resource-group "rg_eastus_hub" --name nva --query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" --output tsv)"
 
 echo $NVAIP
-ssh -t -o StrictHostKeyChecking=no azureuser@$NVAIP 'sudo sysctl -w net.ipv4.ip_forward=1; exit;'
+ssh -t -o StrictHostKeyChecking=no localadmin@$NVAIP 'sudo sysctl -w net.ipv4.ip_forward=1; exit;'
 
-ssh azureuser@$NVAIP
+ssh localadmin@$NVAIP
 sudo apt update
 sudo apt install -y tcpdump iproute2 net-tools
 sudo tcpdump -i any ip
