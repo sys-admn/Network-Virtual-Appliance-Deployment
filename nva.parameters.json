@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "nvaVMNic_name": {
+      "value": "nva_nic"
+    },
+    "nvaNSG_name": {
+      "value": "nva_NSG"
+    },
+    "nvaPublicIP_name": {
+      "value": "nva_public_ip"
+    },
+    "nva_name": {
+      "value": "ubuntu"
+    },
+    "vnet_name": {
+      "value": "VNET"
+    },
+    "routeTable_name": {
+      "value": "nva-route-table"
+    },
+    "location": {
+      "value": "eastus"
+    },
+    "nva_password": {
+      "value": "Fat032@abc1234"
+    },
+    "nva_username": {
+      "value": "localadmin"
+    }
+  }
+}
