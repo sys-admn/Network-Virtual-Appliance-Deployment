@@ -70,16 +70,6 @@ az deployment group create --resource-group rg_eastus_hub --template-file nva.bi
 After deployment, you'll need to:
 
 1. Configure IP forwarding on the Ubuntu VM:
-   ```bash
-   # Enable IP forwarding
-   sudo sysctl -w net.ipv4.ip_forward=1
-   sudo echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
-   
-   # Configure iptables for NAT
-   sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-   ```
-
-2. Install any additional security or networking software required for your NVA functionality
   ```bash
   NICID=$(az vm nic list --resource-group "rg_eastus_hub" --vm-name nva --query "[].{id:id}" --output tsv)
 echo $NICID
@@ -102,3 +92,4 @@ sudo tcpdump -i eth0 net 10.0.0.0/24
 sudo apt install traceroute
 traceroute 10.0.0.4
   ```
+2. Install any additional security or networking software required for your NVA functionality
