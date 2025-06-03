@@ -80,3 +80,25 @@ After deployment, you'll need to:
    ```
 
 2. Install any additional security or networking software required for your NVA functionality
+  ```bash
+  NICID=$(az vm nic list --resource-group "rg_eastus_hub" --vm-name nva --query "[].{id:id}" --output tsv)
+echo $NICID
+
+NICNAME=$(az vm nic show --resource-group "rg_eastus_hub" --vm-name nva --nic $NICID --query "{name:name}" --output tsv)
+echo $NICNAME
+
+az network nic update --name $NICNAME --resource-group "rg_eastus_hub" --ip-forwarding true
+
+NVAIP="$(az vm list-ip-addresses --resource-group "rg_eastus_hub" --name nva --query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" --output tsv)"
+
+echo $NVAIP
+ssh -t -o StrictHostKeyChecking=no azureuser@$NVAIP 'sudo sysctl -w net.ipv4.ip_forward=1; exit;'
+
+ssh azureuser@$NVAIP
+sudo apt update
+sudo apt install -y tcpdump iproute2 net-tools
+sudo tcpdump -i any ip
+sudo tcpdump -i eth0 net 10.0.0.0/24
+sudo apt install traceroute
+traceroute 10.0.0.4
+  ```
