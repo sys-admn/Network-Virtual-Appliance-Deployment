@@ -11,7 +11,7 @@ The template deploys an Ubuntu-based Network Virtual Appliance with the followin
 - Public IP address
 - Network Interface with IP forwarding enabled
 - Route Table for traffic routing through the NVA
-
+![Architecture Diagram](/bicep-visualizer.png)
 ## Resources Deployed
 
 - **Virtual Machine**: Ubuntu 22.04 LTS with TrustedLaunch security
